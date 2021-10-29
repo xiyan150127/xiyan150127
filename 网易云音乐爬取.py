@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed May 26 21:06:39 2021
 
-@author: DELL
-"""
 #需要安装pycrypto: pip install pycryptodome
 #网易云音乐加密过程
 """  
@@ -92,7 +87,7 @@ print('开始爬虫')
 #n = int(input('Please input the page_number that you want scratch:'))
 
 try:
-    for i in range(50):
+    for i in range(10):
          
         data1 = json.dumps({"csrf_token": "", "cursor": "-1", "offset": str(i*20), "orderType": "3", "pageNo": str(i+1),
                              "pageSize": "20", "rid": "R_SO_4_1890044606", "threadId": "R_SO_4_1890044606"})
@@ -146,48 +141,4 @@ finally:
            
            
    
-"""
-for i in range(11):
-     
-    data1 = json.dumps({"csrf_token": "", "cursor": "-1", "offset": str(i*20), "orderType": "1", "pageNo": str(i+1),
-                         "pageSize": "20", "rid": "R_SO_4_1398764652", "threadId": "R_SO_4_1398764652"})
-
-    result = get_params(data1, e, f, g)
-
-    url='https://music.163.com/weapi/comment/resource/comments/get?csrf_token='
-
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36'
-    }
-
-    param_data = {"params": result["encText"],
-                  "encSecKey": result["encSecKey"]}
-
-    response = requests.post(url,data=param_data, headers=headers)
-    items = json.loads(response.text)['data']['comments']
-
-    for item in items:
-
-    #用户昵称
-        user_name = item['user']['nickname'].replace(',', '，')
-    # 用户ID
-        user_id = str(item['user']['userId'])
  
-    # 评论内容
-        comment = item['content'].strip().replace('\n', '').replace(',', '，')
-    # 评论ID
-        comment_id = str(item['commentId'])
-    # 评论点赞数
-        praise = str(item['likedCount'])
-    # 评论时间
-        date = time.localtime(int(str(item['time'])[:10]))
-        date = time.strftime("%Y-%m-%d %H:%M:%S", date) 
-        print(user_name, user_id,comment,comment_id, praise,date) 
-
-        with open('D:\\mysongcomment4.xlsx', 'a', encoding='utf-8-sig') as fp:
-     
-             fp.write(user_name + ',' + user_id + ',' + comment + ',' + comment_id + ',' + praise + ',' + date + '\n')
-             fp.close()
-         
-#print('爬取完毕')       
-"""
